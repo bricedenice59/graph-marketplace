@@ -1,0 +1,338 @@
+[
+  { "inputs": [], "stateMutability": "nonpayable", "type": "constructor" },
+  {
+    "inputs": [],
+    "name": "Marketplace__CannotPurchaseOwnCourse",
+    "type": "error"
+  },
+  { "inputs": [], "name": "Marketplace__CourseAlreadyBought", "type": "error" },
+  {
+    "inputs": [],
+    "name": "Marketplace__CourseAuthorAddressIsSame",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "Marketplace__CourseAuthorAlreadyExist",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "Marketplace__CourseAuthorDoesNotExist",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "Marketplace__CourseAuthorRewardPercentageOutOfBound",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "Marketplace__CourseDoesAlreadyExist",
+    "type": "error"
+  },
+  { "inputs": [], "name": "Marketplace__CourseDoesNotExist", "type": "error" },
+  {
+    "inputs": [],
+    "name": "Marketplace__CourseIsAlreadyActivated",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "Marketplace__CourseIsAlreadyDeactivated",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "Marketplace__CourseMustBeActivated",
+    "type": "error"
+  },
+  { "inputs": [], "name": "Marketplace__InsufficientFunds", "type": "error" },
+  { "inputs": [], "name": "Marketplace__OnlyContractOwner", "type": "error" },
+  { "inputs": [], "name": "Marketplace__OnlyCourseAuthor", "type": "error" },
+  { "inputs": [], "name": "Marketplace__TransferFundsFailed", "type": "error" },
+  {
+    "inputs": [],
+    "name": "Marketplace__WithdrawalFundsFailed",
+    "type": "error"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "bytes32",
+        "name": "courseId",
+        "type": "bytes32"
+      }
+    ],
+    "name": "CourseActivated",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "bytes32",
+        "name": "courseId",
+        "type": "bytes32"
+      },
+      {
+        "indexed": true,
+        "internalType": "bytes32",
+        "name": "courseAuthorId",
+        "type": "bytes32"
+      }
+    ],
+    "name": "CourseAdded",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "bytes32",
+        "name": "courseAuthorId",
+        "type": "bytes32"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "author",
+        "type": "address"
+      }
+    ],
+    "name": "CourseAuthorAdded",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "previousAddress",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "newAddress",
+        "type": "address"
+      }
+    ],
+    "name": "CourseAuthorAddressChanged",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "bytes32",
+        "name": "courseId",
+        "type": "bytes32"
+      }
+    ],
+    "name": "CourseDeactivated",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "bytes32",
+        "name": "courseId",
+        "type": "bytes32"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "buyer",
+        "type": "address"
+      }
+    ],
+    "name": "CoursePurchased",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "toAddress",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "bool",
+        "name": "success",
+        "type": "bool"
+      }
+    ],
+    "name": "WithdrawFunds",
+    "type": "event"
+  },
+  {
+    "inputs": [
+      { "internalType": "bytes32", "name": "courseId", "type": "bytes32" }
+    ],
+    "name": "activateCourse",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [{ "internalType": "bytes32", "name": "id", "type": "bytes32" }],
+    "name": "addCourse",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "courseAuthorId",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "address",
+        "name": "courseAuthorAddress",
+        "type": "address"
+      },
+      { "internalType": "uint8", "name": "rewardPercentage", "type": "uint8" }
+    ],
+    "name": "addCourseAuthor",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "newAddress", "type": "address" }
+    ],
+    "name": "changeCourseAuthorAddress",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "bytes32", "name": "courseId", "type": "bytes32" }
+    ],
+    "name": "deactivateCourse",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getContractOwner",
+    "outputs": [
+      { "internalType": "address", "name": "_address", "type": "address" }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "authorAddress", "type": "address" }
+    ],
+    "name": "getCourseAuthorPublishedCourses",
+    "outputs": [
+      { "internalType": "bytes32[]", "name": "courses", "type": "bytes32[]" }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "bytes32", "name": "courseId", "type": "bytes32" }
+    ],
+    "name": "getCourseStatus",
+    "outputs": [
+      {
+        "internalType": "enum Marketplace.CourseAvailabilityEnum",
+        "name": "status",
+        "type": "uint8"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "_address", "type": "address" },
+      { "internalType": "bytes32", "name": "courseHashId", "type": "bytes32" }
+    ],
+    "name": "hasCourseAlreadyBeenBought",
+    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "bytes32", "name": "courseId", "type": "bytes32" }
+    ],
+    "name": "purchaseCourse",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [{ "internalType": "bytes32", "name": "", "type": "bytes32" }],
+    "name": "s_allCourses",
+    "outputs": [
+      { "internalType": "bytes32", "name": "id", "type": "bytes32" },
+      {
+        "components": [
+          { "internalType": "bytes32", "name": "id", "type": "bytes32" },
+          { "internalType": "address", "name": "_address", "type": "address" },
+          {
+            "internalType": "uint8",
+            "name": "rewardPercentage",
+            "type": "uint8"
+          }
+        ],
+        "internalType": "struct Marketplace.CourseAuthor",
+        "name": "author",
+        "type": "tuple"
+      },
+      {
+        "internalType": "enum Marketplace.PurchaseStatus",
+        "name": "purchaseStatus",
+        "type": "uint8"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "newContractOwner",
+        "type": "address"
+      }
+    ],
+    "name": "transferOwnership",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "amount", "type": "uint256" }
+    ],
+    "name": "withdrawMarketplaceFunds",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  { "stateMutability": "payable", "type": "receive" }
+]

@@ -1,0 +1,11 @@
+# production
+/build
+
+# dependencies
+/node_modules
+
+#tests
+/tests
+
+networks.json
+yarn.lock
