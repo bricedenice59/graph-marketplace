@@ -1,23 +1,20 @@
 type CourseItem @entity {
-    id: ID!
-    courseId: Bytes!
-    author: CourseAuthor!
-    status: ItemStatus!
+  id: ID!
+  author: CourseAuthor!
+  status: ItemStatus!
 }
 
 enum ItemStatus {
-    Activated
-    Deactivated
+  Activated
+  Deactivated
 }
 
 type CourseAuthor @entity {
-    id: ID!
-    authorId: Bytes!
-    address: Bytes!
+  id: ID!
+  address: Bytes!
 }
 
 type PurchasedItem @entity {
-    id: ID!
-    courseId: Bytes!
-    buyer: Bytes!
+  id: ID!
+  buyer: Bytes!
 }

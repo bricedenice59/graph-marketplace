@@ -42,15 +42,6 @@ export class CourseItem extends Entity {
     this.set("id", Value.fromString(value));
   }
 
-  get courseId(): Bytes {
-    let value = this.get("courseId");
-    return value!.toBytes();
-  }
-
-  set courseId(value: Bytes) {
-    this.set("courseId", Value.fromBytes(value));
-  }
-
   get author(): string {
     let value = this.get("author");
     return value!.toString();
@@ -101,15 +92,6 @@ export class CourseAuthor extends Entity {
     this.set("id", Value.fromString(value));
   }
 
-  get authorId(): Bytes {
-    let value = this.get("authorId");
-    return value!.toBytes();
-  }
-
-  set authorId(value: Bytes) {
-    this.set("authorId", Value.fromBytes(value));
-  }
-
   get address(): Bytes {
     let value = this.get("address");
     return value!.toBytes();
@@ -149,15 +131,6 @@ export class PurchasedItem extends Entity {
 
   set id(value: string) {
     this.set("id", Value.fromString(value));
-  }
-
-  get courseId(): Bytes {
-    let value = this.get("courseId");
-    return value!.toBytes();
-  }
-
-  set courseId(value: Bytes) {
-    this.set("courseId", Value.fromBytes(value));
   }
 
   get buyer(): Bytes {
