@@ -1,6 +1,6 @@
 specVersion: 0.0.4
 schema:
-  file: ./schema.graphql
+  file: schema.graphql
 dataSources:
   - kind: ethereum
     name: Marketplace
@@ -19,7 +19,7 @@ dataSources:
         - CourseAdded
       abis:
         - name: Marketplace
-          file: ./abis/Marketplace.json
+          file: Marketplace/abis/Marketplace.json
       eventHandlers:
         - event: BlackListedAuthor(indexed address,indexed bool,indexed uint256)
           handler: handleBlackListedAuthor
@@ -31,4 +31,4 @@ dataSources:
           handler: handleCourseDeactivated
         - event: CoursePurchased(indexed bytes32,indexed address,indexed uint256)
           handler: handleCoursePurchased
-      file: ./src/marketplace.ts
+      file: Marketplace/Marketplace.wasm

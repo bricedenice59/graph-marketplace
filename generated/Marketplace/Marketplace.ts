@@ -10,6 +10,32 @@ import {
   BigInt
 } from "@graphprotocol/graph-ts";
 
+export class BlackListedAuthor extends ethereum.Event {
+  get params(): BlackListedAuthor__Params {
+    return new BlackListedAuthor__Params(this);
+  }
+}
+
+export class BlackListedAuthor__Params {
+  _event: BlackListedAuthor;
+
+  constructor(event: BlackListedAuthor) {
+    this._event = event;
+  }
+
+  get authorAddress(): Address {
+    return this._event.parameters[0].value.toAddress();
+  }
+
+  get isFrozen(): boolean {
+    return this._event.parameters[1].value.toBoolean();
+  }
+
+  get timestamp(): BigInt {
+    return this._event.parameters[2].value.toBigInt();
+  }
+}
+
 export class CourseActivated extends ethereum.Event {
   get params(): CourseActivated__Params {
     return new CourseActivated__Params(this);
@@ -45,30 +71,12 @@ export class CourseAdded__Params {
     return this._event.parameters[0].value.toBytes();
   }
 
-  get courseAuthorId(): Bytes {
-    return this._event.parameters[1].value.toBytes();
-  }
-}
-
-export class CourseAuthorAdded extends ethereum.Event {
-  get params(): CourseAuthorAdded__Params {
-    return new CourseAuthorAdded__Params(this);
-  }
-}
-
-export class CourseAuthorAdded__Params {
-  _event: CourseAuthorAdded;
-
-  constructor(event: CourseAuthorAdded) {
-    this._event = event;
-  }
-
-  get courseAuthorId(): Bytes {
-    return this._event.parameters[0].value.toBytes();
-  }
-
-  get author(): Address {
+  get authorAddress(): Address {
     return this._event.parameters[1].value.toAddress();
+  }
+
+  get timestamp(): BigInt {
+    return this._event.parameters[2].value.toBigInt();
   }
 }
 
@@ -132,6 +140,10 @@ export class CoursePurchased__Params {
   get buyer(): Address {
     return this._event.parameters[1].value.toAddress();
   }
+
+  get timestamp(): BigInt {
+    return this._event.parameters[2].value.toBigInt();
+  }
 }
 
 export class WithdrawFunds extends ethereum.Event {
@@ -157,16 +169,12 @@ export class WithdrawFunds__Params {
 }
 
 export class Marketplace__s_allCoursesResultAuthorStruct extends ethereum.Tuple {
-  get id(): Bytes {
-    return this[0].toBytes();
-  }
-
   get _address(): Address {
-    return this[1].toAddress();
+    return this[0].toAddress();
   }
 
-  get rewardPercentage(): i32 {
-    return this[2].toI32();
+  get isBlacklisted(): boolean {
+    return this[1].toBoolean();
   }
 }
 
@@ -235,6 +243,29 @@ export class Marketplace extends ethereum.SmartContract {
     }
     let value = result.value;
     return ethereum.CallResult.fromValue(value[0].toAddress());
+  }
+
+  getContractRewardPercentage(): i32 {
+    let result = super.call(
+      "getContractRewardPercentage",
+      "getContractRewardPercentage():(uint8)",
+      []
+    );
+
+    return result[0].toI32();
+  }
+
+  try_getContractRewardPercentage(): ethereum.CallResult<i32> {
+    let result = super.tryCall(
+      "getContractRewardPercentage",
+      "getContractRewardPercentage():(uint8)",
+      []
+    );
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toI32());
   }
 
   getCourseAuthorPublishedCourses(authorAddress: Address): Array<Bytes> {
@@ -320,7 +351,7 @@ export class Marketplace extends ethereum.SmartContract {
   s_allCourses(param0: Bytes): Marketplace__s_allCoursesResult {
     let result = super.call(
       "s_allCourses",
-      "s_allCourses(bytes32):(bytes32,(bytes32,address,uint8),uint8)",
+      "s_allCourses(bytes32):(bytes32,(address,bool),uint8)",
       [ethereum.Value.fromFixedBytes(param0)]
     );
 
@@ -338,7 +369,7 @@ export class Marketplace extends ethereum.SmartContract {
   ): ethereum.CallResult<Marketplace__s_allCoursesResult> {
     let result = super.tryCall(
       "s_allCourses",
-      "s_allCourses(bytes32):(bytes32,(bytes32,address,uint8),uint8)",
+      "s_allCourses(bytes32):(bytes32,(address,bool),uint8)",
       [ethereum.Value.fromFixedBytes(param0)]
     );
     if (result.reverted) {
@@ -372,6 +403,10 @@ export class ConstructorCall__Inputs {
 
   constructor(call: ConstructorCall) {
     this._call = call;
+  }
+
+  get contract_reward_percentage(): i32 {
+    return this._call.inputValues[0].value.toI32();
   }
 }
 
@@ -443,40 +478,32 @@ export class AddCourseCall__Outputs {
   }
 }
 
-export class AddCourseAuthorCall extends ethereum.Call {
-  get inputs(): AddCourseAuthorCall__Inputs {
-    return new AddCourseAuthorCall__Inputs(this);
+export class ChangeContractRewardPercentageCall extends ethereum.Call {
+  get inputs(): ChangeContractRewardPercentageCall__Inputs {
+    return new ChangeContractRewardPercentageCall__Inputs(this);
   }
 
-  get outputs(): AddCourseAuthorCall__Outputs {
-    return new AddCourseAuthorCall__Outputs(this);
+  get outputs(): ChangeContractRewardPercentageCall__Outputs {
+    return new ChangeContractRewardPercentageCall__Outputs(this);
   }
 }
 
-export class AddCourseAuthorCall__Inputs {
-  _call: AddCourseAuthorCall;
+export class ChangeContractRewardPercentageCall__Inputs {
+  _call: ChangeContractRewardPercentageCall;
 
-  constructor(call: AddCourseAuthorCall) {
+  constructor(call: ChangeContractRewardPercentageCall) {
     this._call = call;
   }
 
-  get courseAuthorId(): Bytes {
-    return this._call.inputValues[0].value.toBytes();
-  }
-
-  get courseAuthorAddress(): Address {
-    return this._call.inputValues[1].value.toAddress();
-  }
-
-  get rewardPercentage(): i32 {
-    return this._call.inputValues[2].value.toI32();
+  get newRewardPercentage(): i32 {
+    return this._call.inputValues[0].value.toI32();
   }
 }
 
-export class AddCourseAuthorCall__Outputs {
-  _call: AddCourseAuthorCall;
+export class ChangeContractRewardPercentageCall__Outputs {
+  _call: ChangeContractRewardPercentageCall;
 
-  constructor(call: AddCourseAuthorCall) {
+  constructor(call: ChangeContractRewardPercentageCall) {
     this._call = call;
   }
 }
@@ -541,6 +568,36 @@ export class DeactivateCourseCall__Outputs {
   }
 }
 
+export class FreezeAuthorCall extends ethereum.Call {
+  get inputs(): FreezeAuthorCall__Inputs {
+    return new FreezeAuthorCall__Inputs(this);
+  }
+
+  get outputs(): FreezeAuthorCall__Outputs {
+    return new FreezeAuthorCall__Outputs(this);
+  }
+}
+
+export class FreezeAuthorCall__Inputs {
+  _call: FreezeAuthorCall;
+
+  constructor(call: FreezeAuthorCall) {
+    this._call = call;
+  }
+
+  get authorAddress(): Address {
+    return this._call.inputValues[0].value.toAddress();
+  }
+}
+
+export class FreezeAuthorCall__Outputs {
+  _call: FreezeAuthorCall;
+
+  constructor(call: FreezeAuthorCall) {
+    this._call = call;
+  }
+}
+
 export class PurchaseCourseCall extends ethereum.Call {
   get inputs(): PurchaseCourseCall__Inputs {
     return new PurchaseCourseCall__Inputs(this);
@@ -597,6 +654,36 @@ export class TransferOwnershipCall__Outputs {
   _call: TransferOwnershipCall;
 
   constructor(call: TransferOwnershipCall) {
+    this._call = call;
+  }
+}
+
+export class UnFreezeAuthorCall extends ethereum.Call {
+  get inputs(): UnFreezeAuthorCall__Inputs {
+    return new UnFreezeAuthorCall__Inputs(this);
+  }
+
+  get outputs(): UnFreezeAuthorCall__Outputs {
+    return new UnFreezeAuthorCall__Outputs(this);
+  }
+}
+
+export class UnFreezeAuthorCall__Inputs {
+  _call: UnFreezeAuthorCall;
+
+  constructor(call: UnFreezeAuthorCall) {
+    this._call = call;
+  }
+
+  get authorAddress(): Address {
+    return this._call.inputValues[0].value.toAddress();
+  }
+}
+
+export class UnFreezeAuthorCall__Outputs {
+  _call: UnFreezeAuthorCall;
+
+  constructor(call: UnFreezeAuthorCall) {
     this._call = call;
   }
 }

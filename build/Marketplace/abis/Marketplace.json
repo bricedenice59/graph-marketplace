@@ -10,7 +10,11 @@
     "stateMutability": "nonpayable",
     "type": "constructor"
   },
-  { "inputs": [], "name": "Marketplace__AuthorBlacklisted", "type": "error" },
+  {
+    "inputs": [],
+    "name": "Marketplace__AuthorBlacklisted",
+    "type": "error"
+  },
   {
     "inputs": [],
     "name": "Marketplace__CannotPurchaseOwnCourse",
@@ -21,7 +25,11 @@
     "name": "Marketplace__ContractRewardPercentageOutOfBound",
     "type": "error"
   },
-  { "inputs": [], "name": "Marketplace__CourseAlreadyBought", "type": "error" },
+  {
+    "inputs": [],
+    "name": "Marketplace__CourseAlreadyBought",
+    "type": "error"
+  },
   {
     "inputs": [],
     "name": "Marketplace__CourseAuthorAddressIsSame",
@@ -37,7 +45,11 @@
     "name": "Marketplace__CourseDoesAlreadyExist",
     "type": "error"
   },
-  { "inputs": [], "name": "Marketplace__CourseDoesNotExist", "type": "error" },
+  {
+    "inputs": [],
+    "name": "Marketplace__CourseDoesNotExist",
+    "type": "error"
+  },
   {
     "inputs": [],
     "name": "Marketplace__CourseIsAlreadyActivated",
@@ -53,10 +65,26 @@
     "name": "Marketplace__CourseMustBeActivated",
     "type": "error"
   },
-  { "inputs": [], "name": "Marketplace__InsufficientFunds", "type": "error" },
-  { "inputs": [], "name": "Marketplace__OnlyContractOwner", "type": "error" },
-  { "inputs": [], "name": "Marketplace__OnlyCourseAuthor", "type": "error" },
-  { "inputs": [], "name": "Marketplace__TransferFundsFailed", "type": "error" },
+  {
+    "inputs": [],
+    "name": "Marketplace__InsufficientFunds",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "Marketplace__OnlyContractOwner",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "Marketplace__OnlyCourseAuthor",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "Marketplace__TransferFundsFailed",
+    "type": "error"
+  },
   {
     "inputs": [],
     "name": "Marketplace__WithdrawalFundsFailed",
@@ -203,7 +231,11 @@
   },
   {
     "inputs": [
-      { "internalType": "bytes32", "name": "courseId", "type": "bytes32" }
+      {
+        "internalType": "bytes32",
+        "name": "courseId",
+        "type": "bytes32"
+      }
     ],
     "name": "activateCourse",
     "outputs": [],
@@ -211,7 +243,13 @@
     "type": "function"
   },
   {
-    "inputs": [{ "internalType": "bytes32", "name": "id", "type": "bytes32" }],
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "id",
+        "type": "bytes32"
+      }
+    ],
     "name": "addCourse",
     "outputs": [],
     "stateMutability": "nonpayable",
@@ -232,7 +270,11 @@
   },
   {
     "inputs": [
-      { "internalType": "address", "name": "newAddress", "type": "address" }
+      {
+        "internalType": "address",
+        "name": "newAddress",
+        "type": "address"
+      }
     ],
     "name": "changeCourseAuthorAddress",
     "outputs": [],
@@ -241,7 +283,11 @@
   },
   {
     "inputs": [
-      { "internalType": "bytes32", "name": "courseId", "type": "bytes32" }
+      {
+        "internalType": "bytes32",
+        "name": "courseId",
+        "type": "bytes32"
+      }
     ],
     "name": "deactivateCourse",
     "outputs": [],
@@ -250,7 +296,11 @@
   },
   {
     "inputs": [
-      { "internalType": "address", "name": "authorAddress", "type": "address" }
+      {
+        "internalType": "address",
+        "name": "authorAddress",
+        "type": "address"
+      }
     ],
     "name": "freezeAuthor",
     "outputs": [],
@@ -261,7 +311,11 @@
     "inputs": [],
     "name": "getContractOwner",
     "outputs": [
-      { "internalType": "address", "name": "_address", "type": "address" }
+      {
+        "internalType": "address",
+        "name": "_address",
+        "type": "address"
+      }
     ],
     "stateMutability": "view",
     "type": "function"
@@ -270,25 +324,41 @@
     "inputs": [],
     "name": "getContractRewardPercentage",
     "outputs": [
-      { "internalType": "uint8", "name": "percentage", "type": "uint8" }
+      {
+        "internalType": "uint8",
+        "name": "percentage",
+        "type": "uint8"
+      }
     ],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [
-      { "internalType": "address", "name": "authorAddress", "type": "address" }
+      {
+        "internalType": "address",
+        "name": "authorAddress",
+        "type": "address"
+      }
     ],
     "name": "getCourseAuthorPublishedCourses",
     "outputs": [
-      { "internalType": "bytes32[]", "name": "courses", "type": "bytes32[]" }
+      {
+        "internalType": "bytes32[]",
+        "name": "courses",
+        "type": "bytes32[]"
+      }
     ],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [
-      { "internalType": "bytes32", "name": "courseId", "type": "bytes32" }
+      {
+        "internalType": "bytes32",
+        "name": "courseId",
+        "type": "bytes32"
+      }
     ],
     "name": "getCourseStatus",
     "outputs": [
@@ -303,17 +373,35 @@
   },
   {
     "inputs": [
-      { "internalType": "address", "name": "_address", "type": "address" },
-      { "internalType": "bytes32", "name": "courseHashId", "type": "bytes32" }
+      {
+        "internalType": "address",
+        "name": "_address",
+        "type": "address"
+      },
+      {
+        "internalType": "bytes32",
+        "name": "courseHashId",
+        "type": "bytes32"
+      }
     ],
     "name": "hasCourseAlreadyBeenBought",
-    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [
-      { "internalType": "bytes32", "name": "courseId", "type": "bytes32" }
+      {
+        "internalType": "bytes32",
+        "name": "courseId",
+        "type": "bytes32"
+      }
     ],
     "name": "purchaseCourse",
     "outputs": [],
@@ -321,14 +409,32 @@
     "type": "function"
   },
   {
-    "inputs": [{ "internalType": "bytes32", "name": "", "type": "bytes32" }],
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "",
+        "type": "bytes32"
+      }
+    ],
     "name": "s_allCourses",
     "outputs": [
-      { "internalType": "bytes32", "name": "id", "type": "bytes32" },
+      {
+        "internalType": "bytes32",
+        "name": "id",
+        "type": "bytes32"
+      },
       {
         "components": [
-          { "internalType": "address", "name": "_address", "type": "address" },
-          { "internalType": "bool", "name": "isBlacklisted", "type": "bool" }
+          {
+            "internalType": "address",
+            "name": "_address",
+            "type": "address"
+          },
+          {
+            "internalType": "bool",
+            "name": "isBlacklisted",
+            "type": "bool"
+          }
         ],
         "internalType": "struct Marketplace.CourseAuthor",
         "name": "author",
@@ -358,7 +464,11 @@
   },
   {
     "inputs": [
-      { "internalType": "address", "name": "authorAddress", "type": "address" }
+      {
+        "internalType": "address",
+        "name": "authorAddress",
+        "type": "address"
+      }
     ],
     "name": "unFreezeAuthor",
     "outputs": [],
@@ -367,12 +477,19 @@
   },
   {
     "inputs": [
-      { "internalType": "uint256", "name": "amount", "type": "uint256" }
+      {
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      }
     ],
     "name": "withdrawMarketplaceFunds",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
   },
-  { "stateMutability": "payable", "type": "receive" }
+  {
+    "stateMutability": "payable",
+    "type": "receive"
+  }
 ]

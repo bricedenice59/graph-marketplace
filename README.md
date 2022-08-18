@@ -15,7 +15,7 @@ Use Rinkeby as the network.
 3. Initialize Subgraph
 
 ```
-graph init --studio nft-marketplace
+graph init --studio marketplace
 ```
 
 4. Authenticate CLI
@@ -43,7 +43,7 @@ graph codegen && graph build
 Replace `VERSION_NUMBER_HERE` with a version number like `0.0.1`. 
 
 ```
-graph deploy --studio nft-marketplace -l VERSION_NUMBER_HERE
+graph deploy --studio marketplace -l VERSION_NUMBER_HERE
 ```
 
 8. Query the graph (coming soon...)

@@ -59,6 +59,15 @@ export class CourseItem extends Entity {
   set status(value: string) {
     this.set("status", Value.fromString(value));
   }
+
+  get createdAtTimestamp(): BigInt {
+    let value = this.get("createdAtTimestamp");
+    return value!.toBigInt();
+  }
+
+  set createdAtTimestamp(value: BigInt) {
+    this.set("createdAtTimestamp", Value.fromBigInt(value));
+  }
 }
 
 export class CourseAuthor extends Entity {
@@ -100,6 +109,40 @@ export class CourseAuthor extends Entity {
   set address(value: Bytes) {
     this.set("address", Value.fromBytes(value));
   }
+
+  get publications(): Array<string> | null {
+    let value = this.get("publications");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toStringArray();
+    }
+  }
+
+  set publications(value: Array<string> | null) {
+    if (!value) {
+      this.unset("publications");
+    } else {
+      this.set("publications", Value.fromStringArray(<Array<string>>value));
+    }
+  }
+
+  get blacklistedStatus(): Bytes | null {
+    let value = this.get("blacklistedStatus");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toBytes();
+    }
+  }
+
+  set blacklistedStatus(value: Bytes | null) {
+    if (!value) {
+      this.unset("blacklistedStatus");
+    } else {
+      this.set("blacklistedStatus", Value.fromBytes(<Bytes>value));
+    }
+  }
 }
 
 export class PurchasedItem extends Entity {
@@ -140,5 +183,69 @@ export class PurchasedItem extends Entity {
 
   set buyer(value: Bytes) {
     this.set("buyer", Value.fromBytes(value));
+  }
+
+  get createdAtTimestamp(): BigInt {
+    let value = this.get("createdAtTimestamp");
+    return value!.toBigInt();
+  }
+
+  set createdAtTimestamp(value: BigInt) {
+    this.set("createdAtTimestamp", Value.fromBigInt(value));
+  }
+}
+
+export class BlacklistedAuthorItem extends Entity {
+  constructor(id: Bytes) {
+    super();
+    this.set("id", Value.fromBytes(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(
+      id != null,
+      "Cannot save BlacklistedAuthorItem entity without an ID"
+    );
+    if (id) {
+      assert(
+        id.kind == ValueKind.BYTES,
+        `Entities of type BlacklistedAuthorItem must have an ID of type Bytes but the id '${id.displayData()}' is of type ${id.displayKind()}`
+      );
+      store.set("BlacklistedAuthorItem", id.toBytes().toHexString(), this);
+    }
+  }
+
+  static load(id: Bytes): BlacklistedAuthorItem | null {
+    return changetype<BlacklistedAuthorItem | null>(
+      store.get("BlacklistedAuthorItem", id.toHexString())
+    );
+  }
+
+  get id(): Bytes {
+    let value = this.get("id");
+    return value!.toBytes();
+  }
+
+  set id(value: Bytes) {
+    this.set("id", Value.fromBytes(value));
+  }
+
+  get isFrozen(): boolean {
+    let value = this.get("isFrozen");
+    return value!.toBoolean();
+  }
+
+  set isFrozen(value: boolean) {
+    this.set("isFrozen", Value.fromBoolean(value));
+  }
+
+  get createdAtTimestamp(): BigInt {
+    let value = this.get("createdAtTimestamp");
+    return value!.toBigInt();
+  }
+
+  set createdAtTimestamp(value: BigInt) {
+    this.set("createdAtTimestamp", Value.fromBigInt(value));
   }
 }
