@@ -4,11 +4,11 @@ schema:
 dataSources:
   - kind: ethereum
     name: Marketplace
-    network: goerli
+    network: rinkeby
     source:
-      address: "0xFcCC6fe81e54F4153BA9Cb53F8d0E027ef1ac85B"
+      address: "0xB78F6cAD0A0bD93C1fAeDCb6a036c20ddf14afB5"
       abi: Marketplace
-      startBlock: 7426007
+      startBlock: 11228792
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6

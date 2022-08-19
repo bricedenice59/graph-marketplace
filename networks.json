@@ -1,7 +1,7 @@
 {
-  "goerli": {
+  "rinkeby": {
     "Marketplace": {
-      "address": "0xFcCC6fe81e54F4153BA9Cb53F8d0E027ef1ac85B"
+      "address": "0xB78F6cAD0A0bD93C1fAeDCb6a036c20ddf14afB5"
     }
   }
 }
