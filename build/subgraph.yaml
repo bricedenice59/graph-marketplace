@@ -6,9 +6,9 @@ dataSources:
     name: Marketplace
     network: rinkeby
     source:
-      address: "0xB78F6cAD0A0bD93C1fAeDCb6a036c20ddf14afB5"
+      address: "0x478Fd0163B730866410c72B671c5A9cbF1FC8F34"
       abi: Marketplace
-      startBlock: 11228792
+      startBlock: 11302011
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
